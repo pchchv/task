@@ -17,3 +17,11 @@ type TaskStore struct {
 	tasks  map[int]*model.Task
 	nextId int
 }
+
+func New() *TaskStore {
+	ts := &TaskStore{}
+	ts.tasks = make(map[int]*model.Task)
+	ts.nextId = 0
+
+	return ts
+}
