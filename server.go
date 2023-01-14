@@ -4,7 +4,10 @@ import (
 	"log"
 	"os"
 
+	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/joho/godotenv"
+	"github.com/pchchv/task/graph"
+	"github.com/pchchv/task/taskstore"
 )
 
 func init() {
@@ -27,4 +30,9 @@ func getEnvValue(v string) string {
 func main() {
 	port := getEnvValue("PORT")
 
+	resolver := &graph.Resolver{
+		Store: taskstore.New(),
+	}
+
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
 }
