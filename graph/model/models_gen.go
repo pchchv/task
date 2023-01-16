@@ -2,19 +2,33 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+import (
+	"time"
+)
+
+type Attachment struct {
+	Name     string    `json:"Name"`
+	Date     time.Time `json:"Date"`
+	Contents string    `json:"Contents"`
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
+type NewAttachment struct {
+	Name     string    `json:"Name"`
+	Date     time.Time `json:"Date"`
+	Contents string    `json:"Contents"`
 }
 
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type NewTask struct {
+	Text        string           `json:"Text"`
+	Tags        []string         `json:"Tags"`
+	Due         time.Time        `json:"Due"`
+	Attachments []*NewAttachment `json:"Attachments"`
+}
+
+type Task struct {
+	ID          string        `json:"Id"`
+	Text        string        `json:"Text"`
+	Tags        []string      `json:"Tags"`
+	Due         time.Time     `json:"Due"`
+	Attachments []*Attachment `json:"Attachments"`
 }
